@@ -192,7 +192,9 @@ section[id] { scroll-margin-top: 5rem; }
 @media (max-width: 767px) {
   .radar-layout {
     grid-template-columns: 1fr 1fr;
-    grid-template-areas: "chart chart" "cards cards";
+    grid-template-rows: none;
+    grid-template-areas: "chart chart";
+    align-items: stretch;
     gap: 12px;
   }
   .radar-chart-wrap { grid-area: chart; width: 100%; }
@@ -200,12 +202,53 @@ section[id] { scroll-margin-top: 5rem; }
   .radar-side { display: contents; }
   .radar-dimension-card { width: 100%; min-height: 48px; }
   .radar-dimension-card-top,
+  .radar-dimension-card-bottom,
   .radar-dimension-card-upper-left,
   .radar-dimension-card-lower-left,
   .radar-dimension-card-upper-right,
   .radar-dimension-card-lower-right { grid-area: auto; }
+  .radar-layout > .radar-chart-wrap { order: 0; }
+  .radar-dimension-card { order: 1; min-width: 0; min-height: 56px; padding: 10px 8px; overflow-wrap: anywhere; display: flex; align-items: center; justify-content: center; }
+  .radar-dimension-card-upper-right { order: 2; }
+  .radar-dimension-card-lower-right { order: 3; }
+  .radar-dimension-card-bottom { order: 4; }
+  .radar-dimension-card-lower-left { order: 5; }
+  .radar-dimension-card-upper-left { order: 6; }
   .radar-bottom-group { grid-area: auto; display: contents; }
-  .radar-bottom-group .radar-caption { grid-column: 1 / -1; justify-self: center; }
+  .radar-bottom-group .radar-caption { order: 7; grid-column: 1 / -1; justify-self: center; }
+}
+@media (max-width: 1023px) {
+  html, body { overflow-x: clip; }
+  main { padding-bottom: calc(5rem + env(safe-area-inset-bottom)) !important; }
+  .mobile-sticky-cta {
+    right: max(.75rem, env(safe-area-inset-right));
+    left: max(.75rem, env(safe-area-inset-left));
+    bottom: calc(.5rem + env(safe-area-inset-bottom));
+    margin-inline: auto;
+    max-width: 28rem;
+    padding: .65rem 1rem;
+    font-size: .8rem;
+  }
+}
+@media (max-width: 639px) {
+  .nav-brand { overflow: hidden; }
+  .nav-brand img { height: 1.5rem; width: auto; max-width: 100%; }
+  .nav-start { padding: .4rem .75rem !important; font-size: .75rem; }
+  .nav-actions button { padding: .4rem; }
+  #home { padding-top: 5.5rem; padding-bottom: 2.5rem; }
+  #home h1 { font-size: clamp(1.9rem, 8.5vw, 2.5rem); line-height: 1.12; text-wrap: balance; }
+  #home p.mt-6 { margin-top: 1rem; font-size: 1rem; line-height: 1.55; }
+  #home .mt-8 { margin-top: 1.5rem; flex-direction: column; align-items: stretch; }
+  #home .mt-8 .btn, #profile-preview .btn { white-space: normal; text-align: center; }
+  #home .mt-4 { flex-direction: column; gap: .75rem; }
+  #profile-preview .mt-5.flex { flex-direction: column; }
+  #dimensions { padding-block: 3.5rem; }
+  img, svg, video { max-width: 100%; }
+}
+@media (max-width: 360px) {
+  .nav-brand img { height: 1.25rem; }
+  .nav-start { padding: .35rem .6rem !important; font-size: .7rem; }
+  .radar-dimension-card { font-size: .68rem; }
 }
 
 .text-white { color: rgb(var(--text-primary)); }
